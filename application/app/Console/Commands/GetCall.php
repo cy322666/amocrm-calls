@@ -30,7 +30,6 @@ class GetCall extends Command
      * Execute the console command.
      *
      * @return int
-     * @throws DdException
      */
     public function handle(): int
     {
@@ -57,7 +56,6 @@ class GetCall extends Command
             $calls = DB::connection('pgsql2')
                 ->table('calls')
                 ->where('id', '>', $latestId1)
-                ->limit(10)
                 ->get();
 
             foreach ($calls as $call) {

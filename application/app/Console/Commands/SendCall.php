@@ -34,10 +34,9 @@ class SendCall extends Command
      */
     public function handle()
     {
-        $calls = Call::query()->limit(1)
-            ->where('id', 52)
-//            ->where('status', 0)
-//                ->limit(15)
+        $calls = Call::query()
+            ->where('status', 0)
+            ->limit(15)
             ->get();
 
         $amoApi = (new Client(Account::query()->first()))->init();
@@ -50,7 +49,7 @@ class SendCall extends Command
                 if (strlen($call->phone) < 15) {
 
                     $contact = Contacts::search(['Телефоны' => [$call->phone]], $amoApi);
-//dd($contact, $phone, $call);
+
                     $leads = $contact
                         ->leads
                         ->filter(function($lead) {

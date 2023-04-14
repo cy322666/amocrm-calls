@@ -37,7 +37,7 @@ abstract class Notes
             "Телефон - ". $call['phone'],
             "Продолжительность - ". (($call['duration'] % 60) % 60).' мин '.($call['duration'] % 60).' сек',
             "Источник - ". $call['type'],
-            "Ссылка - ". env('APP_URL').'/'.$call['link'],
+            "Ссылка - ". env('APP_URL').'/'.str_replace(' ', '%20', $call['link']),
             $call['direction'] == 'Outgoing' ? 'Направление - Исходящий' : ' Направление -Входящий',
         ]);
     }

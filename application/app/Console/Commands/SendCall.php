@@ -36,7 +36,7 @@ class SendCall extends Command
     {
         $calls = Call::query()
             ->where('status', 0)
-            ->limit(15)
+            ->limit(env('AMOCRM_SEND_LIMIT'))
             ->get();
 
         $amoApi = (new Client(Account::query()->first()))->init();

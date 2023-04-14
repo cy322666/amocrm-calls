@@ -50,24 +50,29 @@ class SendCall extends Command
 
                     $contact = Contacts::search(['Телефоны' => [$call->phone]], $amoApi);
 
-                    $leads = $contact
-                        ->leads
-                        ->filter(function($lead) {
+                    if (is_bool($contact) === false) {
 
-                            return $lead->status_id !== 142 && $lead->status_id !== 143;
-                        });
+                        $leads = $contact
+                            ->leads
+                            ->filter(function($lead) {
 
-                    $lead = $leads->count() > 0 ? $leads->first() : false;
+                                return $lead->status_id !== 142 && $lead->status_id !== 143;
+                            });
 
-                    if ($lead) {
+                        $lead = $leads->count() > 0 ? $leads->first() : false;
 
-                        Notes::addOne($lead, Notes::formatCall(str_replace(' ', '', $call->toArray())));
+                        if ($lead) {
 
-                        $call->lead_id = $lead->id;
-                        $call->contact_id = $lead->contact->id;
-                        $call->status = 1;
+                            Notes::addOne($lead, Notes::formatCall(str_replace(' ', '', $call->toArray())));
+
+                            $call->lead_id = $lead->id;
+                            $call->contact_id = $lead->contact->id;
+                            $call->status = 1;
+                        } else
+                            $call->status = 5;
                     } else
-                        $call->status = 5;
+                        $call->status = 3;
+
                 } else
                     $call->status = 4;
 

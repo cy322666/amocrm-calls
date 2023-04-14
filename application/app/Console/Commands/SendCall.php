@@ -63,7 +63,7 @@ class SendCall extends Command
 
                         if ($lead) {
 
-                            Notes::addOne($lead, Notes::formatCall(str_replace(' ', '', $call->toArray())));
+                            Notes::addOne($lead, Notes::formatCall($call->toArray()));
 
                             $call->lead_id = $lead->id;
                             $call->contact_id = $lead->contact->id;

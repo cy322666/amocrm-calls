@@ -46,7 +46,7 @@ class SendCall extends Command
             try {
                 $amoApi->service->queries->setDelay(0.5);
 
-                if (strlen($call->phone) < 15) {
+//                if (strlen($call->phone) < 15) {
 
                     $contact = Contacts::search(['Телефоны' => [$call->phone]], $amoApi);
 
@@ -73,8 +73,8 @@ class SendCall extends Command
                     } else
                         $call->status = 3;
 
-                } else
-                    $call->status = 4;
+//                } else
+//                    $call->status = 4;
 
                 $call->save();
 

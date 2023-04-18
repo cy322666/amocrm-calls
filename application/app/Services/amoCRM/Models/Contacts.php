@@ -8,29 +8,33 @@ abstract class Contacts extends Client
 {
     public static function search($arrayFields, $client)
     {
-        $contacts  = null;
-        $companies = null;
+        $contacts  = false;
+        $companies = false;
 
         if(key_exists('Телефоны', $arrayFields)) {
 
+            $phone = self::clearPhone($arrayFields['Телефоны'][0]);
+
             $contacts = $client->service
                 ->contacts()
-                ->searchByPhone(self::clearPhone($arrayFields['Телефоны'][0]));
+                ->searchByPhone($phone);
 
-            if ($contacts == null || $contacts->first() == null) {
+            if ($contacts == false || $contacts->first() == false) {
 
                 $companies = $client->service
                     ->companies()
-                    ->searchByPhone(self::clearPhone($arrayFields['Телефоны'][0]));
+                    ->searchByPhone($phone);
             }
         }
 
-        if ($contacts !== null && $contacts->first() !== null) {
+        if ($contacts !== false && $contacts->first() !== false) {
+
             return $contacts->first();
         }
 
-        if ($companies !== null && $companies->first() !== null) {
-            return $contacts->first();
+        if ($companies !== false && $companies->first() !== false) {
+
+            return $companies->first();
         }
 
         return null;

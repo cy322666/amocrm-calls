@@ -6,7 +6,7 @@ use App\Services\amoCRM\Client;
 
 class Calls
 {
-    public static function send(Client $amoApi, $call, int $responsibleId): bool
+    public static function send(Client $amoApi, $call, int $responsibleId)
     {
         return $amoApi->service
             ->ajax()

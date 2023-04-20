@@ -65,7 +65,6 @@ class SendCall extends Command
                         if ($lead) {
 
                             Calls::send($amoApi, $call, $lead->responsible_user_id);
-//                            Notes::addOne($lead, Notes::formatCall($call->toArray()));
 
                             $call->lead_id = $lead->id;
                             $call->contact_id = $lead->contact->id;

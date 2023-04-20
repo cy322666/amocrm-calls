@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Models\Account;
 use App\Models\Call;
+use App\Services\amoCRM\Models\Calls;
 use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
@@ -63,7 +64,8 @@ class SendCall extends Command
 
                         if ($lead) {
 
-                            Notes::addOne($lead, Notes::formatCall($call->toArray()));
+                            Calls::send($amoApi, $call, $lead->responsible_user_id);
+//                            Notes::addOne($lead, Notes::formatCall($call->toArray()));
 
                             $call->lead_id = $lead->id;
                             $call->contact_id = $lead->contact->id;

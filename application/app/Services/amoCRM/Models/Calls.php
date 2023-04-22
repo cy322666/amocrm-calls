@@ -17,7 +17,7 @@ class Calls
                 "link"     => env('APP_URL').'/'.str_replace(' ', '%20', $call['link']),
                 "direction"=> $call['direction'] == 'Incoming' ? 'inbound' : 'outbound',
                 "call_responsible" => $responsibleId,
-                "call_result" => "Успешный разговор",
+                "call_result" => $call['direction'] == 'Incoming' ? 'Входящий звонок. Статус: разговор.' : "Исходящий звонок. Статус: разговор.",
                 "call_status" => 4,
             ]]);
     }

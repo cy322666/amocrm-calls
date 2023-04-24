@@ -30,7 +30,7 @@ class TaskController extends Controller
 
             $completeTill = $dayWeek == 7 ? $dateTime->addDays(2) : $dateTime->addDay();
 
-            $task->complete_till = $completeTill->format('Y-m-d H:i:s');
+            $task->complete_till = $completeTill->timestamp;
             $task->save();
         }
     }

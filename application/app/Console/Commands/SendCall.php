@@ -51,7 +51,7 @@ class SendCall extends Command
 
                     $contact = Contacts::search(['Телефоны' => [$call->phone]], $amoApi);
 
-                    if (is_bool($contact) === false) {
+                    if (is_bool($contact) === false && $contact !== null) {
 
                         $leads = $contact
                             ->leads

@@ -16,6 +16,8 @@ class TaskController extends Controller
      */
     public function weekend(Request $request)
     {
+        Log::info(__METHOD__, $request->toArray());
+
         $dateTime = Carbon::parse($request->toArray()['task']['add'][0]['complete_till']);
         $dayWeek  = Carbon::parse($request->toArray()['task']['add'][0]['complete_till'])->dayOfWeek;
         $taskId   = $request->toArray()['task']['add'][0]['id'];

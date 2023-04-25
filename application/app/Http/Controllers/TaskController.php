@@ -34,6 +34,8 @@ class TaskController extends Controller
 
             $task->complete_till = $completeTill->timestamp;
             $task->save();
+
+            Log::info(__METHOD__.' : success change');
         }
     }
 }

@@ -20,9 +20,9 @@ class TaskController extends Controller
         $dayWeek  = Carbon::parse($request->toArray()['task']['add'][0]['complete_till'])->dayOfWeek;
         $taskId   = $request->toArray()['task']['add'][0]['id'];
 
-        if ($dayWeek == 6 || $dayWeek == 7) {
+        Log::info(__METHOD__, ['day' => $dayWeek, 'task' => $taskId]);
 
-            Log::info(__METHOD__, ['day' => $dayWeek, 'task' => $taskId]);
+        if ($dayWeek == 6 || $dayWeek == 7) {
 
             $amoApi = (new Client(Account::query()->first()))->init();
 
